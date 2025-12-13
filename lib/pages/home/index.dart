@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hm_shop/api/home.dart';
 import 'package:hm_shop/components/home/hmCategory.dart';
 import 'package:hm_shop/components/home/hmHot.dart';
 import 'package:hm_shop/components/home/hmMoreList.dart';
@@ -14,22 +15,22 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final List<BannerItem> _bannerList = [
-    BannerItem(
-      id: '1',
-      imgUrl:
-          "https://img.alicdn.com/imgextra/i1/O1CN01f0xQO3231pCQyxUMR_!!6000000007196-2-tps-2112-800.png",
-    ),
-    BannerItem(
-      id: '2',
-      imgUrl:
-          "https://img.alicdn.com/imgextra/i3/O1CN01zILgqe1OpNoGuLwC6_!!6000000001754-2-tps-2112-800.png",
-    ),
-    BannerItem(
-      id: '3',
-      imgUrl:
-          'https://img.alicdn.com/imgextra/i4/O1CN01hyRl721l7AjxUP0kt_!!6000000004771-2-tps-2112-800.png',
-    ),
+  List<BannerItem> _bannerList = [
+    // BannerItem(
+    //   id: '1',
+    //   imgUrl:
+    //       "https://img.alicdn.com/imgextra/i1/O1CN01f0xQO3231pCQyxUMR_!!6000000007196-2-tps-2112-800.png",
+    // ),
+    // BannerItem(
+    //   id: '2',
+    //   imgUrl:
+    //       "https://img.alicdn.com/imgextra/i3/O1CN01zILgqe1OpNoGuLwC6_!!6000000001754-2-tps-2112-800.png",
+    // ),
+    // BannerItem(
+    //   id: '3',
+    //   imgUrl:
+    //       'https://img.alicdn.com/imgextra/i4/O1CN01hyRl721l7AjxUP0kt_!!6000000004771-2-tps-2112-800.png',
+    // ),
   ];
   //获取滚动容器的内容
   List<Widget> _getScrollChildren() {
@@ -64,6 +65,18 @@ class _HomeViewState extends State<HomeView> {
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       HmMoreList(),
     ];
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getBannerList();
+  }
+
+  void _getBannerList() async {
+    _bannerList = await getBannerListAPI();
+    setState(() {});
   }
 
   @override
