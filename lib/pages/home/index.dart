@@ -15,6 +15,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  //分类列表
+  List<CategoryItem> _categoryList = [];
   List<BannerItem> _bannerList = [
     // BannerItem(
     //   id: '1',
@@ -40,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
       //放置间隔
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       //放置分类组件
-      SliverToBoxAdapter(child: HmCategory()),
+      SliverToBoxAdapter(child: HmCategory(categoryList: _categoryList)),
       //放置间隔
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       //放置推荐组件
@@ -72,6 +74,13 @@ class _HomeViewState extends State<HomeView> {
     // TODO: implement initState
     super.initState();
     _getBannerList();
+    _getCategoryList();
+  }
+
+  //获取分类列表
+  void _getCategoryList() async {
+    _categoryList = await getCategoryListAPI();
+    setState(() {});
   }
 
   void _getBannerList() async {

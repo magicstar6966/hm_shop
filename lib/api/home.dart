@@ -7,6 +7,14 @@ Future<List<BannerItem>> getBannerListAPI() async {
   return ((await dioRequest.get(HttpConstants.BANNER_LIST)) as List).map((
     item,
   ) {
-    return BannerItem.formJSON(item as Map<String, dynamic>);
+    return BannerItem.fromJson(item as Map<String, dynamic>);
+  }).toList();
+}
+//分类列表
+Future<List<CategoryItem>> getCategoryListAPI() async {
+  return ((await dioRequest.get(HttpConstants.CATEGORY_LIST)) as List).map((
+    item,
+  ) {
+    return CategoryItem.fromJson(item as Map<String, dynamic>);
   }).toList();
 }
