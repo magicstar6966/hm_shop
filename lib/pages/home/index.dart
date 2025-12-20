@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
       //放置间隔
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       //放置推荐组件
-      SliverToBoxAdapter(child: HmSuggestion()),
+      SliverToBoxAdapter(child: HmSuggestion(specialOffer: _specialOffer)),
       //放置间隔
       SliverToBoxAdapter(child: SizedBox(height: 10)),
       //放置爆款推荐
@@ -69,12 +69,22 @@ class _HomeViewState extends State<HomeView> {
     ];
   }
 
+  //特惠推荐
+  SpecialOffer _specialOffer = SpecialOffer(id: '', title: '', subTypes: []);
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _getBannerList();
     _getCategoryList();
+    _getSpecialOfferList();
+  }
+
+  //获取特惠推荐
+  void _getSpecialOfferList() async {
+    _specialOffer = await getSpecialOfferListAPI();
+    setState(() {});
   }
 
   //获取分类列表

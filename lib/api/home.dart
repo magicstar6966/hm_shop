@@ -10,6 +10,7 @@ Future<List<BannerItem>> getBannerListAPI() async {
     return BannerItem.fromJson(item as Map<String, dynamic>);
   }).toList();
 }
+
 //分类列表
 Future<List<CategoryItem>> getCategoryListAPI() async {
   return ((await dioRequest.get(HttpConstants.CATEGORY_LIST)) as List).map((
@@ -17,4 +18,11 @@ Future<List<CategoryItem>> getCategoryListAPI() async {
   ) {
     return CategoryItem.fromJson(item as Map<String, dynamic>);
   }).toList();
+}
+
+//特惠推荐
+Future<SpecialOffer> getSpecialOfferListAPI() async {
+  return SpecialOffer.fromJson(
+    await dioRequest.get(HttpConstants.PRODUCT_LIST),
+  );
 }
